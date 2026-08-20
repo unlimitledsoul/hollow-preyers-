@@ -1,105 +1,234 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SE Palmeiras - Galeria de Títulos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Molle:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
-    <!-- Botão de alternar tema -->
-    <button id="botao_tema">Modo Escuro</button>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Glórias - SE Palmeiras</title>
+  <style>
+    :root {
+      --primary: #006437; /* Verde Palmeiras */
+      --primary-dark: #004d2a;
+      --accent: #c5a059; /* Dourado */
+      --bg: #f4f7f4;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+    }
 
-    <header>
-      <h1>Sociedade Esportiva Palmeiras</h1>
-      <img id="escudo" src="https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.svg" alt="Escudo Oficial do Palmeiras" width="140">
-      <p class="descricao">
-        Fundado em 1914 como Palestra Italia, o Verdão é reconhecido como o Maior Campeão do Brasil, ostentando a maior quantidade de títulos nacionais no futebol brasileiro.
-      </p>
-      <a href="https://www.palmeiras.com.br" target="_blank" class="link-fonte">Site Oficial do Palmeiras</a>
-    </header>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
 
-    <!-- Seção Interativa de Títulos -->
-    <section class="secao-trofeus">
-      <h2>Sala de Troféus</h2>
-      <p class="contador-total">Total exibido: <span id="total_trofeus">0</span> títulos</p>
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--primary);
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
 
-      <!-- Botões de Filtro -->
-      <div class="filtros">
-        <button class="btn-filtro ativo" onclick="filtrarTitulos('todos')">Todos</button>
-        <button class="btn-filtro" onclick="filtrarTitulos('nacional')">Nacionais</button>
-        <button class="btn-filtro" onclick="filtrarTitulos('internacional')">Internacionais</button>
-        <button class="btn-filtro" onclick="filtrarTitulos('estadual')">Estaduais</button>
-      </div>
+    .logo-palmeiras {
+      width: 90px;
+      margin-bottom: 15px;
+    }
 
-      <!-- Cards de Títulos -->
-      <div class="grid-titulos">
-        <div class="card-titulo" data-categoria="internacional" data-quantidade="3">
-          <span class="icone-trofeu">🏆</span>
-          <h3>Copa Libertadores</h3>
-          <div class="quantidade">3 Títulos</div>
-          <p class="anos">Anos: 1999, 2020, 2021</p>
-        </div>
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
 
-        <div class="card-titulo" data-categoria="internacional" data-quantidade="1">
-          <span class="icone-trofeu">⭐</span>
-          <h3>Copa Rio (Mundial)</h3>
-          <div class="quantidade">1 Título</div>
-          <p class="anos">Ano: 1951</p>
-        </div>
+    .subtitle {
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-top: 5px;
+      font-weight: bold;
+    }
 
-        <div class="card-titulo" data-categoria="nacional" data-quantidade="12">
-          <span class="icone-trofeu">🥇</span>
-          <h3>Campeonato Brasileiro</h3>
-          <div class="quantidade">12 Títulos</div>
-          <p class="anos">1960, 1967 (Taça Brasil), 1967 (RGP), 1969, 1972, 1973, 1993, 1994, 2016, 2018, 2022, 2023</p>
-        </div>
+    .counter {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      opacity: 0.95;
+    }
 
-        <div class="card-titulo" data-categoria="nacional" data-quantidade="4">
-          <span class="icone-trofeu">🍷</span>
-          <h3>Copa do Brasil</h3>
-          <div class="quantidade">4 Títulos</div>
-          <p class="anos">Anos: 1998, 2012, 2015, 2020</p>
-        </div>
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
 
-        <div class="card-titulo" data-categoria="nacional" data-quantidade="1">
-          <span class="icone-trofeu">👑</span>
-          <h3>Supercopa do Brasil</h3>
-          <div class="quantidade">1 Título</div>
-          <p class="anos">Ano: 2023</p>
-        </div>
+    .filter-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
 
-        <div class="card-titulo" data-categoria="estadual" data-quantidade="26">
-          <span class="icone-trofeu">🛡️</span>
-          <h3>Campeonato Paulista</h3>
-          <div class="quantidade">26 Títulos</div>
-          <p class="anos">Destaques recentes: 2020, 2022, 2023, 2024</p>
-        </div>
-      </div>
-    </section>
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
 
-    <!-- Galeria de Imagens com Alternador Dinâmico -->
-    <section class="secao-arena">
-      <h2>Nossa Casa: Allianz Parque</h2>
-      <img id="imagem_arena" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Allianz_Parque_2020.jpg" alt="Allianz Parque em dia de jogo" width="550">
-      <br>
-      <button class="btn-arena" onclick="mudarImagemArena()">Alternar Foto da Arena</button>
-    </section>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-    <!-- Links Importantes -->
-    <section class="secao-links">
-      <h2>Canais Oficiais</h2>
-      <ul>
-        <li><a href="https://www.palmeiras.com.br/avanti/" target="_blank">Sócio Torcedor Avanti</a></li>
-        <li><a href="https://www.ingressospalmeiras.com.br" target="_blank">Comprar Ingressos</a></li>
-        <li><a href="https://www.youtube.com/user/tvpalmeiras" target="_blank">TV Palmeiras / FAM (YouTube)</a></li>
-        <li><a href="https://www.palmeirasstore.com" target="_blank">Loja Oficial Palmeiras Store</a></li>
-      </ul>
-    </section>
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border-bottom: 4px solid var(--primary);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
 
-    <script src="./script.js"></script>
-  </body>
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+    }
+
+    .trophy-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px 0;
+      color: var(--primary);
+    }
+
+    .count {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin: 10px 0;
+    }
+
+    .years {
+      font-size: 0.85rem;
+      color: #4b5563;
+      max-height: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+
+    .card:hover .years {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img class="logo-palmeiras" src="https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.svg" alt="Escudo do Palmeiras">
+    <h1>Sala de Troféus</h1>
+    <div class="subtitle">Sociedade Esportiva Palmeiras</div>
+    <div class="counter">Total Exibido: <span id="total-count">0</span> títulos</div>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterTitles('all')">Todos</button>
+    <button class="filter-btn" onclick="filterTitles('nacional')">Nacionais</button>
+    <button class="filter-btn" onclick="filterTitles('internacional')">Internacionais</button>
+  </div>
+
+  <div class="grid">
+    <div class="card" data-category="internacional" data-amount="3">
+      <div class="trophy-icon">🏆</div>
+      <h3>Copa Libertadores</h3>
+      <div class="count">3</div>
+      <div class="years">Anos: 1999, 2020, 2021</div>
+    </div>
+
+    <div class="card" data-category="internacional" data-amount="1">
+      <div class="trophy-icon">⭐</div>
+      <h3>Copa Rio (Mundial)</h3>
+      <div class="count">1</div>
+      <div class="years">Ano: 1951</div>
+    </div>
+
+    <div class="card" data-category="nacional" data-amount="12">
+      <div class="trophy-icon">🥇</div>
+      <h3>Campeonato Brasileiro</h3>
+      <div class="count">12</div>
+      <div class="years">1960, 1967 (TB), 1967 (RGP), 1969, 1972, 1973, 1993, 1994, 2016, 2018, 2022, 2023</div>
+    </div>
+
+    <div class="card" data-category="nacional" data-amount="4">
+      <div class="trophy-icon">👑</div>
+      <h3>Copa do Brasil</h3>
+      <div class="count">4</div>
+      <div class="years">Anos: 1998, 2012, 2015, 2020</div>
+    </div>
+
+    <div class="card" data-category="nacional" data-amount="1">
+      <div class="trophy-icon">🛡️</div>
+      <h3>Supercopa do Brasil</h3>
+      <div class="count">1</div>
+      <div class="years">Ano: 2023</div>
+    </div>
+
+    <div class="card" data-category="internacional" data-amount="1">
+      <div class="trophy-icon">🔰</div>
+      <h3>Recopa Sul-Americana</h3>
+      <div class="count">1</div>
+      <div class="years">Ano: 2022</div>
+    </div>
+  </div>
+
+  <script>
+    function filterTitles(category) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const visibleCards = document.querySelectorAll('.card[style*="display: block"], .card:not([style*="display"])');
+      let total = 0;
+      visibleCards.forEach(card => {
+        total += parseInt(card.dataset.amount);
+      });
+      document.getElementById('total-count').textContent = total;
+    }
+
+    // Inicializa o contador ao carregar
+    updateTotal();
+  </script>
+
+</body>
 </html>
